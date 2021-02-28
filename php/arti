@@ -1,0 +1,4 @@
+#!/bin/bash
+# shellcheck disable=SC2006
+PROJECT=`basename "$PWD"`;
+docker exec -i -w //var//www//"$PROJECT" mo3-apps php artisan "$@";

@@ -1,0 +1,41 @@
+version: '3'
+services:
+  postgresql:
+    container_name: mo3-postgres
+    image: postgres:11
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+  apps:
+    build: ./php
+    container_name: mo3-apps
+    tty: true
+    volumes:
+      - ./apps:/var/www
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - app-network
+    depends_on:
+      - postgresql
+  nginx:
+    image: nginx:alpine
+    container_name: mo3-nginx
+    tty: true
+    ports:
+      - 8080:80
+      - 443:443
+    volumes:
+      - ./apps:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
