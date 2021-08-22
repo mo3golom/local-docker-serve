@@ -1,6 +1,6 @@
 Сборка для поднятия локального сервера разработки
 
-* PHP: php:7.3-fpm-stretch
+* PHP: php:8.0.9-fpm
 * NGINX: nginx:alpine
 * БД: postgres:11
 
