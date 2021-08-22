@@ -7,3 +7,6 @@ down:
 restart:
 	@make -s down;
 	@make -s up;
+
+exec:
+	@docker exec -it mo3-apps bash;
