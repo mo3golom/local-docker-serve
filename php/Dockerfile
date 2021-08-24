@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install -y \
     libmagickcore-dev
 
 RUN docker-php-ext-install pdo_mysql pdo_pgsql zip exif pcntl
-RUN docker-php-ext-configure gd
+RUN docker-php-ext-configure gd  --with-freetype=/usr/include/ --with-jpeg=/usr/include/
 RUN docker-php-ext-install -j$(nproc) gd
 
 # Install Composer
