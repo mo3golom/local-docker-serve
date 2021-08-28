@@ -33,6 +33,9 @@ RUN docker-php-ext-install pdo_mysql pdo_pgsql zip exif pcntl
 RUN docker-php-ext-configure gd  --with-freetype=/usr/include/ --with-jpeg=/usr/include/
 RUN docker-php-ext-install -j$(nproc) gd
 
+RUN apt-get -y update && apt-get -y install ffmpeg imagemagick
+RUN sed -i 's/none/read,write/g' /etc/ImageMagick-6/policy.xml
+
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
